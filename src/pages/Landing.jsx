@@ -1,12 +1,14 @@
 import React from "react";
-import logo from "../assets/images/logo.svg";
 import main from "../assets/images/main.svg";
+import Wrapper from "../assets/wrappers/LandingPage";
+import { Logo } from "../components";
+import { Link } from "react-router-dom";
 
 function Landing() {
   return (
-    <main>
+    <Wrapper>
       <nav>
-        <img src={logo} className="logo" alt="Jobster logo" />
+        <Logo />
       </nav>
       <div className="container page">
         <div className="info">
@@ -19,11 +21,13 @@ function Landing() {
             debitis temporibus? Quidem sint excepturi architecto magnam nesciunt
             rerum consectetur, quam praesentium.
           </p>
-          <button className="btn btn-hero">Login/Register</button>
+          <Link to="/register" className="btn btn-hero">
+            Login/Register
+          </Link>
         </div>
-        <img src={main} alt="Jobster" />
+        <img src={main} className="main-img" alt="Jobster" />
       </div>
-    </main>
+    </Wrapper>
   );
 }
 
