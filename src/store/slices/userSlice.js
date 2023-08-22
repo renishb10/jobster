@@ -11,12 +11,23 @@ loginUser;
 
 const initialState = {
   isLoading: false,
+  isSideBarOpen: false,
   user: getUserFromLocalStorage(),
 };
 
 const userSlice = createSlice({
   name: "user",
   initialState,
+  reducers: {
+    toggleSidebar: (state) => {
+      state.isSideBarOpen = !state.isSideBarOpen;
+    },
+    logoutUser: (state) => {
+      state.user = null;
+      state.isSideBarOpen = false;
+      removeUserFromLocalStorage();
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(registerUser.pending, (state) => {
@@ -50,4 +61,5 @@ const userSlice = createSlice({
   },
 });
 
+export const { toggleSidebar, logoutUser } = userSlice.actions;
 export default userSlice.reducer;
