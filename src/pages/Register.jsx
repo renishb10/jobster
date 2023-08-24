@@ -67,14 +67,14 @@ function Register() {
           />
         )}
         <FormRow
-          type="text"
+          type="email"
           name="email"
           value={values.email}
           handleChange={handleChange}
           labelText="Email"
         />
         <FormRow
-          type="text"
+          type="password"
           name="password"
           value={values.password}
           handleChange={handleChange}

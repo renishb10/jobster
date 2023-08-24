@@ -4,6 +4,7 @@ import { FaTimes } from "react-icons/fa";
 import Logo from "./Logo";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleSidebar } from "../store/slices/userSlice";
+import NavLinks from "./NavLinks";
 
 function SmallSideBar() {
   const { isSideBarOpen } = useSelector((store) => store.user);
@@ -27,7 +28,7 @@ function SmallSideBar() {
           <header>
             <Logo />
           </header>
-          <div className="nav-links">NavLinks</div>
+          <NavLinks toggleSideBar={toggle} />
         </div>
       </div>
     </Wrapper>
