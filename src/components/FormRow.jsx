@@ -7,6 +7,7 @@ function FormRow({ type, name, value, handleChange, labelText }) {
         {labelText}
       </label>
       <input
+        id={name}
         type={type}
         name={name}
         value={value}

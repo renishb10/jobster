@@ -1,16 +1,18 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import customFetch from "../../../utils/axios";
 import { logoutUser } from "../slices/userSlice";
+import { clearValues } from "../slices/jobSlice";
 
-export const updateUser = createAsyncThunk(
-  "user/updateUser",
-  async (user, thunkAPI) => {
+export const createJob = createAsyncThunk(
+  "user/createJob",
+  async (job, thunkAPI) => {
     try {
-      const resp = await customFetch.patch("/auth/updateUser", user, {
+      const resp = await customFetch.post("/jobs", job, {
         headers: {
           Authorization: `Bearer ${thunkAPI.getState().user.user.token}`,
         },
       });
+      thunkAPI.dispatch(clearValues());
       return resp.data;
     } catch (error) {
       console.error(error.response);

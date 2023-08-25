@@ -22,10 +22,13 @@ const userSlice = createSlice({
     toggleSidebar: (state) => {
       state.isSideBarOpen = !state.isSideBarOpen;
     },
-    logoutUser: (state) => {
+    logoutUser: (state, action) => {
       state.user = null;
       state.isSideBarOpen = false;
       removeUserFromLocalStorage();
+      if (action.payload) {
+        toast.success(action.payload);
+      }
     },
   },
   extraReducers(builder) {
