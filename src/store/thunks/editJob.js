@@ -3,11 +3,11 @@ import customFetch from "../../../utils/axios";
 import { logoutUser } from "../slices/userSlice";
 import { clearValues } from "../slices/jobSlice";
 
-export const createJob = createAsyncThunk(
-  "user/createJob",
-  async (job, thunkAPI) => {
+export const editJob = createAsyncThunk(
+  "user/editJob",
+  async ({ jobId, job }, thunkAPI) => {
     try {
-      const resp = await customFetch.post("/jobs", job);
+      const resp = await customFetch.patch(`/jobs/${jobId}`, job);
       thunkAPI.dispatch(clearValues());
       return resp.data;
     } catch (error) {

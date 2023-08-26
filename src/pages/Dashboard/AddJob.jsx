@@ -6,6 +6,7 @@ import { FormRow } from "../../components";
 import FormRowSelect from "../../components/FormRowSelect";
 import { clearValues, handleChange } from "../../store/slices/jobSlice";
 import { createJob } from "../../store/thunks/createJob";
+import { editJob } from "../../store/thunks/editJob";
 
 function AddJob() {
   const { user } = useSelector((store) => store.user);
@@ -25,7 +26,9 @@ function AddJob() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(handleChange({ name: "jobLocation", value: user.location }));
+    if (!isEditing) {
+      dispatch(handleChange({ name: "jobLocation", value: user.location }));
+    }
   }, []);
 
   const handleSubmit = (e) => {
@@ -33,6 +36,16 @@ function AddJob() {
 
     if (!position || !company || !jobLocation) {
       toast.error("Please fill out all fields");
+      return;
+    }
+
+    if (isEditing) {
+      dispatch(
+        editJob({
+          jobId: editJobId,
+          job: { position, company, jobLocation, jobType, status },
+        })
+      );
       return;
     }
 

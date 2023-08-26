@@ -5,6 +5,8 @@ import Wrapper from "../assets/wrappers/Job";
 import { Link } from "react-router-dom";
 import JobInfo from "./JobInfo";
 import { FaBriefcase, FaCalendarAlt, FaLocationArrow } from "react-icons/fa";
+import { deleteJob } from "../store/thunks/deleteJob";
+import { setEditJob } from "../store/slices/jobSlice";
 
 function Job({
   _id,
@@ -41,13 +43,24 @@ function Job({
             <Link
               to="/add-job"
               className="btn edit-btn"
-              onClick={() => console.log("edit job")}
+              onClick={() =>
+                dispatch(
+                  setEditJob({
+                    editJobId: _id,
+                    position,
+                    company,
+                    jobLocation,
+                    jobType,
+                    status,
+                  })
+                )
+              }
             >
               Edit
             </Link>
             <button
               className="btn delete-btn"
-              onClick={() => console.log("delete job")}
+              onClick={() => dispatch(deleteJob(_id))}
             >
               Delete
             </button>
