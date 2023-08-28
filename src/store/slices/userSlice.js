@@ -8,6 +8,7 @@ import {
   getUserFromLocalStorage,
   removeUserFromLocalStorage,
 } from "../../../utils/localStorage";
+import { clearStore } from "../thunks/clearStore";
 
 const initialState = {
   isLoading: false,
@@ -76,6 +77,10 @@ const userSlice = createSlice({
         state.isLoading = false;
         toast.error(action.payload);
       });
+
+    builder.addCase(clearStore.rejected, () => {
+      toast.error("There was an error...");
+    });
   },
 });
 
